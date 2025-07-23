@@ -346,36 +346,40 @@ const library = {
   ],
 };
 
-renderList()
-render()
+renderList();
+render();
 
-function renderList(){
-   for (let key in library) 
+function renderList() {
+  for (let key in library)
     listSongs.innerHTML += `<li data-type="nonActive" class="container-left-text__list">${key}</li>`;
 }
-function render(text = "all",toggle = "all"){
-  albumWindiw.innerHTML = ""
+function render(text = "all", toggle = "all") {
+  albumWindiw.innerHTML = "";
   for (let key in library) {
-    if(toggle === "all" && text === "all"){
-    library[key].forEach((elem) => {
-      albumWindiw.innerHTML += pullHtml(elem.title, elem.artist, elem.cover);
-    });
-  }else{
-    if(text === key)
+    if (toggle === "all" && text === "all") {
       library[key].forEach((elem) => {
-      albumWindiw.innerHTML += pullHtml(elem.title, elem.artist, elem.cover);
-    });
-  }
+        albumWindiw.innerHTML += pullHtml(elem.title, elem.artist, elem.cover);
+      });
+    } else {
+      if (text === key)
+        library[key].forEach((elem) => {
+          albumWindiw.innerHTML += pullHtml(
+            elem.title,
+            elem.artist,
+            elem.cover
+          );
+        });
+    }
   }
 }
 
 const song = document.querySelectorAll(".container-left-text__list");
-let active
+let active;
 
 listSongs.addEventListener("click", (event) => {
   let li = event.target.tagName;
   let text = event.target.textContent;
-  active = ""
+  active = "";
   if (li === "LI") {
     song.forEach((elem) => {
       if (
@@ -391,13 +395,13 @@ listSongs.addEventListener("click", (event) => {
         elem.classList.remove("container-left-text__list-BLACK");
         elem.setAttribute("data-type", "nonActive");
         active = "all";
-        text = "all"
+        text = "all";
       } else {
         elem.classList.remove("container-left-text__list-BLACK");
         elem.setAttribute("data-type", "nonActive");
       }
     });
-    render(text,active)
+    render(text, active);
   }
 });
 
@@ -419,16 +423,23 @@ function pullHtml(title, artist, cover) {
   `;
 }
 
-const searchInp = document.querySelector(".Top-SearchBar-frame__inp")
+const searchInp = document.querySelector(".Top-SearchBar-frame__inp");
 
-searchInp.addEventListener("input",()=>{
-  albumWindiw.innerHTML = ""
-   for (let key in library) {
-    library[key].filter(elem=>{
-      if(Object.values(elem)[1].toLowerCase().includes(searchInp.value.toLowerCase())||Object.values(elem)[2].toLowerCase().includes(searchInp.value.toLowerCase())){
-        let a = Object.values(elem)[1]
-         albumWindiw.innerHTML += pullHtml(a, elem.artist, elem.cover);
+searchInp.addEventListener("input", () => {
+  albumWindiw.innerHTML = "";
+  for (let key in library) {
+    library[key].filter((elem) => {
+      if (
+        Object.values(elem)[1]
+          .toLowerCase()
+          .includes(searchInp.value.toLowerCase()) ||
+        Object.values(elem)[2]
+          .toLowerCase()
+          .includes(searchInp.value.toLowerCase())
+      ) {
+        let a = Object.values(elem)[1];
+        albumWindiw.innerHTML += pullHtml(a, elem.artist, elem.cover);
       }
-    })
+    });
   }
-})
+});
