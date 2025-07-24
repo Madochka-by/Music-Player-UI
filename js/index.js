@@ -24,6 +24,7 @@ userAvatar.src = user.image;
 
 const listSongs = document.querySelector(".container-left-text");
 const albumWindiw = document.querySelector(".container-album-window");
+let ARRAYWITHID = [];
 
 const library = {
   "Only For You": [
@@ -68,14 +69,14 @@ const library = {
   ],
   "Top Releases": [
     {
-      id: 1,
+      id: 6,
       title: "Bad Guy",
       artist: "Billie Eilish",
       cover: "https://i1.sndcdn.com/artworks-000569704310-3cghgo-t500x500.jpg",
       src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3",
     },
     {
-      id: 2,
+      id: 7,
       title: "Hush",
       artist: "Baby Cute",
       cover:
@@ -83,7 +84,7 @@ const library = {
       src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-7.mp3",
     },
     {
-      id: 3,
+      id: 8,
       title: "Last Summer",
       artist: "Влад Пиво",
       cover:
@@ -91,7 +92,7 @@ const library = {
       src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3",
     },
     {
-      id: 5,
+      id: 9,
       title: "Каен",
       artist: "Валентин Стрыкало",
       cover:
@@ -101,7 +102,7 @@ const library = {
   ],
   Pop: [
     {
-      id: 1,
+      id: 10,
       title: "Give Me Everything",
       artist: "Pitbull, Ne - Yo, Afrojack, Nayer",
       cover:
@@ -109,7 +110,7 @@ const library = {
       src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-11.mp3",
     },
     {
-      id: 2,
+      id: 11,
       title: "Right Round",
       artist: "Flo Rida, Kesha",
       cover:
@@ -117,7 +118,7 @@ const library = {
       src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-12.mp3",
     },
     {
-      id: 3,
+      id: 12,
       title: "Lean On",
       artist: "Major Lazer & DJ Snake",
       cover: "https://i1.sndcdn.com/artworks-000117561421-1sr0ib-t500x500.jpg",
@@ -126,7 +127,7 @@ const library = {
   ],
   "Hip-Hop": [
     {
-      id: 1,
+      id: 13,
       title: "ICE",
       artist: "Morgenshtern",
       cover:
@@ -134,7 +135,7 @@ const library = {
       src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-16.mp3",
     },
     {
-      id: 2,
+      id: 14,
       title: "Cadillac",
       artist: "Morgenshtern feat. Элджей",
       cover:
@@ -142,7 +143,7 @@ const library = {
       src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-17.mp3",
     },
     {
-      id: 3,
+      id: 15,
       title: "adventure of a lifetime",
       artist: "Coldplay",
       cover:
@@ -150,7 +151,7 @@ const library = {
       src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-18.mp3",
     },
     {
-      id: 4,
+      id: 16,
       title: "Cristal & МОЁТ",
       artist: "Morgenshtern",
       cover:
@@ -158,7 +159,7 @@ const library = {
       src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-19.mp3",
     },
     {
-      id: 5,
+      id: 17,
       title: "МАМБЛ",
       artist: "GONE.Fludd",
       cover: "https://i.scdn.co/image/ab67616d0000b2731085a198328ef11f6129ca60",
@@ -167,7 +168,7 @@ const library = {
   ],
   Party: [
     {
-      id: 1,
+      id: 18,
       title: "Йупи Йо",
       artist: "Scally Milano(feat. 163ONMYNECK, MAYOT)",
       cover:
@@ -175,7 +176,7 @@ const library = {
       src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-21.mp3",
     },
     {
-      id: 2,
+      id: 19,
       title: "СТОМАТОЛОГИЧКА",
       artist: "163ONMYNECK & BUSHIDO ZHO",
       cover:
@@ -183,7 +184,7 @@ const library = {
       src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-22.mp3",
     },
     {
-      id: 3,
+      id: 20,
       title: "ПЕРЕВЕС",
       artist: "163ONMYNECK",
       cover:
@@ -191,14 +192,14 @@ const library = {
       src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-23.mp3",
     },
     {
-      id: 4,
+      id: 21,
       title: "Dance Monkey",
       artist: "Tones and I",
       cover: "https://i1.sndcdn.com/artworks-000579495074-txx5aq-t500x500.jpg",
       src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-24.mp3",
     },
     {
-      id: 5,
+      id: 22,
       title: "Blinding Lights",
       artist: "The Weeknd",
       cover:
@@ -208,7 +209,7 @@ const library = {
   ],
   Indie: [
     {
-      id: 1,
+      id: 23,
       title: "Video Games",
       artist: "Lana Del Rey",
       cover:
@@ -216,7 +217,7 @@ const library = {
       src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-26.mp3",
     },
     {
-      id: 2,
+      id: 24,
       title: "Born to Die",
       artist: "Lana Del Rey",
       cover:
@@ -224,7 +225,7 @@ const library = {
       src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-27.mp3",
     },
     {
-      id: 3,
+      id: 25,
       title: "Summertime Sadness",
       artist: "Lana Del Rey",
       cover:
@@ -232,7 +233,7 @@ const library = {
       src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-28.mp3",
     },
     {
-      id: 4,
+      id: 26,
       title: "Brooklyn Baby",
       artist: "Lana Del Rey",
       cover:
@@ -240,7 +241,7 @@ const library = {
       src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-29.mp3",
     },
     {
-      id: 5,
+      id: 27,
       title: "Young and Beautiful",
       artist: "Lana Del Rey",
       cover:
@@ -250,7 +251,7 @@ const library = {
   ],
   Summer: [
     {
-      id: 1,
+      id: 28,
       title: "Heat Waves",
       artist: "Glass Animals",
       cover:
@@ -258,7 +259,7 @@ const library = {
       src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-31.mp3",
     },
     {
-      id: 2,
+      id: 29,
       title: "НОН СТОП",
       artist: "ПОШЛАЯ МОЛЛИ",
       cover:
@@ -266,7 +267,7 @@ const library = {
       src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-32.mp3",
     },
     {
-      id: 3,
+      id: 30,
       title: "Cake By The Ocean",
       artist: "DNCE",
       cover:
@@ -274,14 +275,14 @@ const library = {
       src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-33.mp3",
     },
     {
-      id: 4,
+      id: 31,
       title: "Summer",
       artist: "Calvin Harris",
       cover: "https://i1.sndcdn.com/artworks-000544042710-e14hfs-t500x500.jpg",
       src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-34.mp3",
     },
     {
-      id: 5,
+      id: 32,
       title: "Cool for the Summer",
       artist: "Demi Lovato",
       cover:
@@ -291,28 +292,28 @@ const library = {
   ],
   Romance: [
     {
-      id: 1,
+      id: 33,
       title: "Love Me Like You Do",
       artist: "Ellie Goulding",
       cover: "https://i1.sndcdn.com/artworks-000179078251-ax79uc-t500x500.jpg",
       src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-36.mp3",
     },
     {
-      id: 2,
+      id: 34,
       title: "All of Me",
       artist: "John Legend",
       cover: "https://i.scdn.co/image/ab67616d0000b273d56159304b0098aa0873b839",
       src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-37.mp3",
     },
     {
-      id: 3,
+      id: 35,
       title: "Say You Won’t Let Go",
       artist: "James Arthur",
       cover: "https://i1.sndcdn.com/artworks-000195650453-kgwtvo-t500x500.jpg",
       src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-38.mp3",
     },
     {
-      id: 4,
+      id: 36,
       title: "Photograph",
       artist: "Ed Sheeran",
       cover:
@@ -322,21 +323,21 @@ const library = {
   ],
   Workout: [
     {
-      id: 1,
+      id: 37,
       title: "Stronger",
       artist: "Kanye West",
       cover: "https://i.scdn.co/image/ab67616d0000b27331b08098da21b8c97b4e907f",
       src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-41.mp3",
     },
     {
-      id: 2,
+      id: 38,
       title: "Till I Collapse",
       artist: "Eminem",
       cover: "https://i1.sndcdn.com/artworks-YOfM1MVNffzk-0-t500x500.jpg",
       src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-42.mp3",
     },
     {
-      id: 3,
+      id: 39,
       title: "Remember the Name",
       artist: "Fort Minor",
       cover:
@@ -358,7 +359,13 @@ function render(text = "all", toggle = "all") {
   for (let key in library) {
     if (toggle === "all" && text === "all") {
       library[key].forEach((elem) => {
-        albumWindiw.innerHTML += pullHtml(elem.title, elem.artist, elem.cover);
+        albumWindiw.innerHTML += pullHtml(
+          elem.title,
+          elem.artist,
+          elem.cover,
+          1
+        );
+        ARRAYWITHID.push(elem.id);
       });
     } else {
       if (text === key)
@@ -366,11 +373,13 @@ function render(text = "all", toggle = "all") {
           albumWindiw.innerHTML += pullHtml(
             elem.title,
             elem.artist,
-            elem.cover
+            elem.cover,
+            1
           );
         });
     }
   }
+  todayTopPicks(ARRAYWITHID);
 }
 
 const song = document.querySelectorAll(".container-left-text__list");
@@ -405,8 +414,9 @@ listSongs.addEventListener("click", (event) => {
   }
 });
 
-function pullHtml(title, artist, cover) {
-  return ` 
+function pullHtml(title, artist, cover, flag) {
+  if (flag == 1)
+    return ` 
    <div class="container-album-window-item">
             <div class="container-album-window-item-block1">
               <img
@@ -418,6 +428,22 @@ function pullHtml(title, artist, cover) {
             <div class="container-album-window-item-block2">
               <h1 class="container-album-window-item-block2__h1 ">${title}</h1>
               <p class="container-album-window-item-block2__p">${artist}</p>
+            </div>
+          </div>
+  `;
+  else
+    return ` 
+   <div class="container-right-block-item">
+            <img
+              class="container-right-block-item__image"
+              src="${cover}"
+              alt=""
+            />
+            <div class="container-right-block-item-text">
+              <h1 class="container-right-block-item-text__h">
+                ${title}
+              </h1>
+              <p class="container-right-block-item-text__p">${artist}</p>
             </div>
           </div>
   `;
@@ -438,8 +464,36 @@ searchInp.addEventListener("input", () => {
           .includes(searchInp.value.toLowerCase())
       ) {
         let a = Object.values(elem)[1];
-        albumWindiw.innerHTML += pullHtml(a, elem.artist, elem.cover);
+        albumWindiw.innerHTML += pullHtml(a, elem.artist, elem.cover, 1);
       }
     });
   }
 });
+
+function todayTopPicks(arr) {
+  const todayTopPicksBlock = document.querySelector(".container-right-block");
+  let randomId = [];
+  let random;
+  for (let i = 0; i < 5; i++) {
+    do {
+      random = Math.floor(Math.random() * arr.length);
+    } while (randomId.includes(random));
+
+    randomId.push(random);
+  }
+  for (let key in library) {
+    randomId.forEach((Element) => {
+      library[key].forEach((elem) => {
+        if (Object.values(elem)[0] == Element) {
+          todayTopPicksBlock.innerHTML += pullHtml(
+            elem.title,
+            elem.artist,
+            elem.cover,
+            2
+          );
+        }
+      });
+    });
+  }
+}
+//  todayTopPicksBlock.innerHTML += pullHtml(elem.title,elem.artist,elem.cover,2);
