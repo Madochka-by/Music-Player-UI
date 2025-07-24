@@ -126,6 +126,7 @@ header img {
   background: rgba(236, 243, 249, 1);
   padding: 20px 20px;
 }
+
 .container-left__textH,
 .container-right__textH {
   display: flex;
@@ -154,7 +155,6 @@ header img {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-
   padding-top: 5px;
 }
 .container-left-see,

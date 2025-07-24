@@ -379,8 +379,8 @@ function render(text = "all", toggle = "all") {
         });
     }
   }
-  todayTopPicks(ARRAYWITHID);
 }
+todayTopPicks(ARRAYWITHID);
 
 const song = document.querySelectorAll(".container-left-text__list");
 let active;
@@ -431,7 +431,7 @@ function pullHtml(title, artist, cover, flag) {
             </div>
           </div>
   `;
-  else
+  else if (flag == 2)
     return ` 
    <div class="container-right-block-item">
             <img
@@ -472,6 +472,7 @@ searchInp.addEventListener("input", () => {
 
 function todayTopPicks(arr) {
   const todayTopPicksBlock = document.querySelector(".container-right-block");
+  todayTopPicksBlock.innerHTML = "";
   let randomId = [];
   let random;
   for (let i = 0; i < 5; i++) {
