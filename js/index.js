@@ -25,6 +25,7 @@ userAvatar.src = user.image;
 const listSongs = document.querySelector(".container-left-text");
 const albumWindiw = document.querySelector(".container-album-window");
 let ARRAYWITHID = [];
+let ARRAYWITHSRCSONG = [];
 
 const library = {
   "Only For You": [
@@ -367,9 +368,11 @@ function render(text = "all", toggle = "all") {
           1
         );
         ARRAYWITHID.push(elem.id);
+        ARRAYWITHSRCSONG.push(elem.src);
       });
     } else {
-      if (text === key)
+      if (text === key) {
+        ARRAYWITHSRCSONG = [];
         library[key].forEach((elem) => {
           albumWindiw.innerHTML += pullHtml(
             elem.title,
@@ -378,7 +381,9 @@ function render(text = "all", toggle = "all") {
             elem.id,
             1
           );
+          ARRAYWITHSRCSONG.push(elem.src);
         });
+      }
     }
   }
 }
@@ -548,6 +553,8 @@ document.addEventListener("click", (event) => {
 const progressBar = document.querySelector(".play-middle-bot__range");
 const startSong = document.getElementById("start");
 const endSong = document.getElementById("end");
+const volume = document.getElementById("volume");
+const playSong = document.getElementById("play");
 
 audio.addEventListener("loadedmetadata", () => {
   const duration = audio.duration;
@@ -563,6 +570,21 @@ audio.addEventListener("timeupdate", () => {
 
 progressBar.addEventListener("input", () => {
   audio.currentTime = progressBar.value;
+});
+
+volume.addEventListener("input", () => {
+  audio.volume = volume.value;
+});
+
+let flag = false;
+playSong.addEventListener("click", () => {
+  if (flag == false) {
+    audio.pause();
+    flag = true;
+  } else {
+    audio.play();
+    flag = false;
+  }
 });
 
 function formatDuration(seconds, span) {
