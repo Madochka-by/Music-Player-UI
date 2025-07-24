@@ -34,7 +34,7 @@ const library = {
       artist: "Billie Eilish",
       cover:
         "https://upload.wikimedia.org/wikipedia/ru/a/a2/Ocean_Eyes_%28Official_Single_Cover%29_by_Billie_Eilish.png",
-      src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+      src: "/audio/Billie Eilish - bad guy (with Justin Bieber).mp3",
     },
     {
       id: 2,
@@ -42,7 +42,7 @@ const library = {
       artist: "Baby Melon",
       cover:
         "https://i1.sndcdn.com/artworks-l1Vka894dpnuJgR9-Gu4Vxg-t500x500.jpg",
-      src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+      src: "/audio/Baby Melo, FADE031 - Сломана (новые песни 2025).mp3",
     },
     {
       id: 3,
@@ -50,7 +50,7 @@ const library = {
       artist: "Алёна Швец",
       cover:
         "https://i1.sndcdn.com/artworks-YdJxo4ZNzY6OOvzL-htQudw-t500x500.jpg",
-      src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",
+      src: "/audio/Алёна Швец - Вино и Сигареты.mp3",
     },
     {
       id: 4,
@@ -264,7 +264,7 @@ const library = {
       artist: "ПОШЛАЯ МОЛЛИ",
       cover:
         "https://i1.sndcdn.com/artworks-7aMCYl0WXnRWzzVl-DkL6Vg-t1080x1080.jpg",
-      src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-32.mp3",
+      src: "/audio/Пошлая Молли - НОН СТОП.mp3",
     },
     {
       id: 30,
@@ -520,6 +520,7 @@ function todayTopPicks(arr) {
 
 const panelController = document.querySelector(".play ");
 const songFrame = document.querySelector(".play-left-item");
+const audio = document.getElementById("audio-player");
 
 document.addEventListener("click", (event) => {
   let atrib = event.target.getAttribute("data-type");
@@ -536,8 +537,38 @@ document.addEventListener("click", (event) => {
             elem.id,
             3
           );
+          audio.src = elem.src;
+          audio.play();
         }
       });
     }
   }
 });
+
+const progressBar = document.querySelector(".play-middle-bot__range");
+const startSong = document.getElementById("start");
+const endSong = document.getElementById("end");
+
+audio.addEventListener("loadedmetadata", () => {
+  const duration = audio.duration;
+  progressBar.max = duration;
+  formatDuration(duration, endSong);
+});
+
+audio.addEventListener("timeupdate", () => {
+  const current = audio.currentTime;
+  progressBar.value = current;
+  formatDuration(current, startSong);
+});
+
+progressBar.addEventListener("input", () => {
+  audio.currentTime = progressBar.value;
+});
+
+function formatDuration(seconds, span) {
+  const minutes = Math.floor(seconds / 60);
+  const remainingSeconds = Math.floor(seconds % 60);
+  const formattedMinutes = String(minutes).padStart(2, "0");
+  const formattedSeconds = String(remainingSeconds).padStart(2, "0");
+  return (span.textContent = `${formattedMinutes}:${formattedSeconds}`);
+}
