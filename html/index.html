@@ -94,7 +94,60 @@
       </div>
     </div>
     <div class="play">
-      <audio id="myAudio" src="путь/к/вашему/аудиофайлу.mp3" controls></audio>
+      <div class="play-left">
+        <div class="play-left-item">
+          <!-- <img
+            class="play-left-item__img"
+            src="https://i1.sndcdn.com/artworks-l1Vka894dpnuJgR9-Gu4Vxg-t500x500.jpg"
+            alt=""
+          />
+          <h1 class="play-left-item__h">slomano</h1>
+          <p class="play-left-item__p">baby melon</p> -->
+        </div>
+        <div class="play-left_svg">
+          <img class="play-left_svg__img" src="/img/Path.png" alt="" />
+        </div>
+      </div>
+      <div class="play-middle">
+        <div class="play-middle-top">
+          <img
+            id="prev"
+            src="/img/prev.png"
+            alt=""
+            class="play-middle-top__img"
+          />
+          <img
+            id="play"
+            src="/img/play.png"
+            alt=""
+            class="play-middle-top__img"
+          />
+          <img
+            id="next"
+            src="/img/next.png"
+            alt=""
+            class="play-middle-top__img"
+          />
+        </div>
+        <div class="play-middle-bot">
+          <span>00:00</span>
+          <input type="range" class="play-middle-bot__range" />
+          <span>00:00</span>
+        </div>
+      </div>
+      <div class="play-right">
+        <img src="/img/volume.png" alt="" class="play-right__volume" />
+        <input
+          id="volume"
+          min="0"
+          max="1"
+          step="0.1"
+          type="range"
+          class="play-right__range"
+        />
+        <img src="/img/repeat.png" alt="" class="play-right__repeat" />
+        <img src="/img/random.png" alt="" class="play-right__random" />
+      </div>
     </div>
   </body>
 </html>

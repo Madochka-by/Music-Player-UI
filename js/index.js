@@ -363,6 +363,7 @@ function render(text = "all", toggle = "all") {
           elem.title,
           elem.artist,
           elem.cover,
+          elem.id,
           1
         );
         ARRAYWITHID.push(elem.id);
@@ -374,6 +375,7 @@ function render(text = "all", toggle = "all") {
             elem.title,
             elem.artist,
             elem.cover,
+            elem.id,
             1
           );
         });
@@ -414,38 +416,49 @@ listSongs.addEventListener("click", (event) => {
   }
 });
 
-function pullHtml(title, artist, cover, flag) {
+function pullHtml(title, artist, cover, id, flag) {
   if (flag == 1)
     return ` 
-   <div class="container-album-window-item">
-            <div class="container-album-window-item-block1">
-              <img
+   <div class="container-album-window-item" >
+            <div id="${id}" class="container-album-window-item-block1" data-type="song">
+              <img id="${id}"data-type="song"
                 class="container-album-window-item-block1__img"
                 src="${cover}"
                 alt=""
               />
             </div>
-            <div class="container-album-window-item-block2">
-              <h1 class="container-album-window-item-block2__h1 ">${title}</h1>
-              <p class="container-album-window-item-block2__p">${artist}</p>
+            <div  id="${id}"data-type="song"class="container-album-window-item-block2">
+              <h1 id="${id}"data-type="song" class="container-album-window-item-block2__h1 ">${title}</h1>
+              <p id="${id}"data-type="song"class="container-album-window-item-block2__p">${artist}</p>
             </div>
           </div>
   `;
   else if (flag == 2)
     return ` 
-   <div class="container-right-block-item">
-            <img
+   <div class="container-right-block-item" data-type="song" id="${id}">
+            <img id="${id}"data-type="song"
               class="container-right-block-item__image"
               src="${cover}"
               alt=""
             />
-            <div class="container-right-block-item-text">
-              <h1 class="container-right-block-item-text__h">
+            <div id="${id}"data-type="song"class="container-right-block-item-text">
+              <h1 id="${id}"data-type="song"class="container-right-block-item-text__h">
                 ${title}
               </h1>
-              <p class="container-right-block-item-text__p">${artist}</p>
+              <p id="${id}"data-type="song"class="container-right-block-item-text__p">${artist}</p>
             </div>
           </div>
+  `;
+  else if (flag == 3)
+    return ` 
+          <img 
+            class="play-left-item__img"
+            src="${cover}"
+            alt=""
+          />
+          <h1 class="play-left-item__h"> ${title}</h1>
+          <p class="play-left-item__p">${artist}</p>
+
   `;
 }
 
@@ -464,7 +477,13 @@ searchInp.addEventListener("input", () => {
           .includes(searchInp.value.toLowerCase())
       ) {
         let a = Object.values(elem)[1];
-        albumWindiw.innerHTML += pullHtml(a, elem.artist, elem.cover, 1);
+        albumWindiw.innerHTML += pullHtml(
+          a,
+          elem.artist,
+          elem.cover,
+          elem.id,
+          1
+        );
       }
     });
   }
@@ -490,6 +509,7 @@ function todayTopPicks(arr) {
             elem.title,
             elem.artist,
             elem.cover,
+            elem.id,
             2
           );
         }
@@ -497,4 +517,27 @@ function todayTopPicks(arr) {
     });
   }
 }
-//  todayTopPicksBlock.innerHTML += pullHtml(elem.title,elem.artist,elem.cover,2);
+
+const panelController = document.querySelector(".play ");
+const songFrame = document.querySelector(".play-left-item");
+
+document.addEventListener("click", (event) => {
+  let atrib = event.target.getAttribute("data-type");
+  let id = event.target.id;
+  if (atrib === "song") {
+    panelController.style.display = "grid";
+    for (let key in library) {
+      library[key].forEach((elem) => {
+        if (Object.values(elem)[0] == id) {
+          songFrame.innerHTML = pullHtml(
+            elem.title,
+            elem.artist,
+            elem.cover,
+            elem.id,
+            3
+          );
+        }
+      });
+    }
+  }
+});
